@@ -1,0 +1,32 @@
+<ul>
+	<li class='listing'>
+		<div class='u-full-width'>
+			<form id='users-new' action='/users' method='POST'>
+				<input type='hidden' name='_method' value='put'/>
+				<label for='fname' class='u-full-width'>First Name</label>
+				<input id='fname' type='text' class='u-full-width form--input' name="user[fname]" placeholder='First Name' maxlength="128" value="<%= @data[:fname].capitalize %>">
+
+				<label for='lname' class='u-full-width'>Last Name</label>
+				<input id='lname' type='text' class='u-full-width form--input' name="user[lname]" placeholder='Last Name' maxlength="128" value="<%= @data[:lname].capitalize %>">
+
+				<label for='username' class='u-full-width'>Username</label>
+				<input id='username' type='text' class='u-full-width form--input' name="user[username]" placeholder='Username' maxlength='64' value="<%= @data[:username] %>"/>
+
+				<label for='email' class='u-full-width'>Email Address</label>
+				<input id='email' type='text' class='u-full-width form--input' name="user[email]" placeholder='Email Address' maxlength='64' value="<%= @data[:email] %>"/>
+
+				<label for='phone' class='u-full-width'>Mobile No.</label>
+				<input id='phone' type='tel' class='u-full-width form--input' name="user[phone]" placeholder='Mobile No.' maxlength='64' value="<%= @data[:phone] %>"/>
+
+				<!-- <label for='dob' class='u-full-width'>Bithday</label>
+				<input id='dob' class='u-full-width form--input' type='date' step='any' name="user[dob]" value="<% @data[:dob] %>"/> -->
+			</form>
+		</div>
+		<div class='u-full-width'>
+			<span class='listing--amount'>
+				Join the community!
+			</span>
+			<button class='u-pull-right' type='submit' form='users-new'>Save</button>
+		</div>
+	</li>
+</ul>

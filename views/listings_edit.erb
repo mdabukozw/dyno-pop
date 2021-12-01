@@ -1,0 +1,27 @@
+<ul>
+	<li class='listing'>
+		<div class='u-full-width'>
+			<form id='listings-new' action='/requests' method='POST'>
+				<label for='message' class='u-full-width'>Category</label>
+				<select class='u-full-width form--input' readonly>
+					<option value='1'>Personal</option>
+				</select>
+
+				<label for='message' class='u-full-width'>Message</label>
+				<textarea id='message' class='u-full-width form--input' name="request[message]" class='u-full-width' placeholder='Message' maxlength="250"></textarea>
+
+				<label for='amount' class='u-full-width'>Amount (ZW$)</label>
+				<input id='amount' class='u-full-width form--input' type='number' step='any' name="request[amount]" class='u-full-width' placeholder='ZW$ 0.00' min='1'/>
+
+				<label for='deadline' class='u-full-width'>Deadline</label>
+				<input id='deadline' class='u-full-width form--input' type='date' step='any' name="request[deadline]" class='u-full-width' placeholder='Z$ 0.00' min='1'/>
+			</form>
+		</div>
+		<div class='u-full-width'>
+			<span class='listing--amount'>
+				Change this and share again
+			</span>
+			<button class='u-pull-right' type='submit' form='listings-new'>Save</button>
+		</div>
+	</li>
+</ul>

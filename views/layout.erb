@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DynoPop</title>
+		<meta charset="utf-8">
+		<%= css :base, :skeleton, :styles %>
+	</head>
+	<body>
+		<%= erb :nav %>
+		<section id='u-main' class='six columns'>
+			<header>
+				<h1>
+					DynoPop
+					<!-- <span class='u-pull-right'>From others</span> -->
+				</h1>
+			</header>
+			<%= styled_flash %>
+			<%= yield %>
+		</section>
+	</body>
+</html>

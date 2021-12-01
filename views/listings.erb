@@ -1,0 +1,72 @@
+<ul class='listing--container'>
+	<% if !@data.nil? %>
+		<% @data.each do |request|  %>
+		<li class='listing'>
+			<div class='listing--metadata u-full-width'>
+				<!-- <div class='listing--user-avatar icon-small'>
+					<figure style="background-image: url('/images/mdbk_25112021638.jpg');"></figure>
+				</div> -->
+				<div>
+					<span><b>@<%= request[:user][:username] %></b></span>
+					<span class='u-pull-right'>
+						<span class='listing--timestamp'><%= request[:created_at] %></span>
+						<span class='listing--menu'>
+							<img src='/icons/ellipsis-vertical.svg' class='icon-nano'/>
+							<ul class='u-menu bordered'>
+								<a href='/requests/<%= request[:id] %>/edit'>
+									<li>Edit</li>
+								</a>
+								<a href='/requests/<%= request[:id] %>/delete'>
+									<li>Delete</li>
+								</a>
+							</ul>
+						</span>
+					</span>
+				</div>
+				<span class='listing--timestamp'><%= (Time.now.to_i - request[:created_at]) % (3600 / 24) %> days left</span>
+			</div>
+			<div class='u-full-width'>
+				<p class='listing--story'>
+					<%= request[:message] %>
+				</p>
+			</div>
+			<div class='u-full-width'>
+				<span class='listing--amount'>
+					Z$<%= sprintf('%0.2f', request[:amount]) %>
+				</span>
+				<div class='button u-pull-right'>
+					<span>
+						<svg id="i-lightning" class='icon-nano' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none" stroke="currentcolor" stroke-linecap="round" stroke-linejoin="round" stroke-width="6.25%">
+						    <path d="M18 13 L26 2 8 13 14 19 6 30 24 19 Z" />
+						</svg>
+					</span>
+					<span>Jumpstart</span>
+				</div>
+			</div>
+		</li>
+		<% end %>
+	<% else %>
+	<li class='listing'>
+		<div class='u-full-width'>
+			<p class='listing--story'>
+				No records found
+			</p>
+		</div>
+	</li>
+	<% end %>
+	<!-- <li class='listing'>
+		<div class='listing--metadata u-full-width'>
+			<div class='listing--user-avatar icon-small'></div>
+			<div>
+				<span class='listing--fullname'>Full Name</span>
+				<span class='listing--timestamp u-pull-right'>12h</span>
+			</div>
+			<span class='listing--username'>mdabukozw</span>
+		</div>
+		<div class='u-full-width'>
+			<p class='listing--story'>
+				Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+			</p>
+		</div>
+	</li> -->
+</ul>
