@@ -36,23 +36,32 @@ helpers do
 end
 
 get '/' do
+	@path = :'DynoPop'
 	unless params.nil?
 		@dyno_link		= params[:byte]
 		@dyno_address	= params[:link]
 		params.clear
 	end
-	erb :url_new
+	erb :home
 end
 
 get '/:url' do
 	@dyno_link = params[:url]
 
+	
+
 	file = File.new('bytes.json', 'r+')
 	json = File.read(file)
 	data = JSON.parse(json)
+
+	unless data['data'].keys.include?(@dyno_link)
+		redirect to not_found
+	end
+	
 	@dyno_address = data['data'][@dyno_link]
 	file.close
 	
+	status 302
 	redirect to @dyno_address
 end
 
@@ -96,4 +105,10 @@ post '/links' do
 
 	@dyno_address = url
 	redirect to("/?byte=#{@dyno_link}&link=#{url_encode(url)}")
+end
+
+not_found do
+	@path = :'oops! page not found'
+	status 404
+	erb :'404'
 end

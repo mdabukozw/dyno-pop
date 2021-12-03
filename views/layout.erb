@@ -9,8 +9,8 @@
 		<%= erb :nav %>
 		<section id='u-main' class='six columns'>
 			<header>
-				<h1>
-					DynoPop
+				<h1 style='text-align: center;'>
+					<%= @path %>
 					<!-- <span class='u-pull-right'>From others</span> -->
 				</h1>
 			</header>
@@ -18,4 +18,17 @@
 			<%= yield %>
 		</section>
 	</body>
+	<script>
+		function copy_link() {
+			var byte_link = document.querySelector('#paragraph--short-link');
+			var byte_copy_button = document.querySelector('#button--copy-link');
+
+			/* Copy the text inside the text field */
+			navigator.clipboard.writeText(byte_link.innerText);
+			
+			/* Change the class to indicate successful copying */
+			byte_copy_button.innerText = 'Copied';
+			byte_copy_button.className = 'button u-pull-right'
+		}
+	</script>
 </html>

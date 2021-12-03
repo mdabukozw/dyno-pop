@@ -1,0 +1,39 @@
+<ul class='listing--container'>
+	<li class='listing'>
+		<div class='u-full-width'>
+			<form id='link-new' action='/links' method='POST'>
+				<label for='link' class='u-full-width'>Shorten your link</label>
+				<input id='link' class='u-full-width form--input' type='text' name="link" placeholder='Shorten your link' minlength='6' title='Enter a link with a least 4 characters'/>
+			</form>
+		</div>
+		<div class='u-full-width'>
+			<span class='listing--amount'>
+				Let's get you a short link
+			</span>
+			<button class='u-pull-right' type='submit' form='link-new'>Shorten</button>
+		</div>
+	</li>
+	<% unless @dyno_link.nil? %>
+		<li class='listing'>
+			<div class='listing--metadata u-full-width'>
+				<div>
+					<span><b>#dynopop</b></span>
+					<span class='u-pull-right'>
+						<span class='listing--timestamp'><%= Time.now.strftime('%d %b %Y') %></span>
+					</span>
+				</div>
+			</div>
+			<div class='u-full-width'>
+				<p id='paragraph--short-link' class='listing--link'>
+					<a href="/<%= @dyno_link %>" target='_blank'>https://dynopop.com/<%= @dyno_link %></a>
+				</p>
+			</div>
+			<div class='u-full-width'>
+				<span class='listing--amount'>
+					Ready to copy
+				</span>
+				<button id='button--copy-link' class='button__outline u-pull-right' onclick='copy_link()'>Copy</button>
+			</div>
+		</li>
+	<% end %>
+</ul>

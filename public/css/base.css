@@ -16,8 +16,6 @@ figure {
   margin: auto;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100vh;
 }
 .bordered {
   border: 1px solid black;
@@ -118,7 +116,7 @@ figure {
   float: unset;
   clear: both;
   height: auto;
-  background-color: inherit;
+  background: none;
   max-width: 1024px;
   margin-bottom: 1%;
   box-sizing: border-box; 
