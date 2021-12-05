@@ -3,7 +3,7 @@
 		<div class='u-full-width'>
 			<form id='link-new' action='/links' method='POST'>
 				<label for='link' class='u-full-width'>Shorten your link</label>
-				<input id='link' class='u-full-width form--input' type='text' name="link" placeholder='Shorten your link' minlength='6' title='Enter a link with a least 4 characters'/>
+				<input id='link' class='u-full-width form--input' type='text' name="link" placeholder='Shorten your link' minlength="8" title='Enter a link with a least 8 characters' required/>
 			</form>
 		</div>
 		<div class='u-full-width'>
@@ -16,24 +16,76 @@
 	<% unless @dyno_link.nil? %>
 		<li class='listing'>
 			<div class='listing--metadata u-full-width'>
-				<div>
-					<span><b>#dynopop</b></span>
-					<span class='u-pull-right'>
-						<span class='listing--timestamp'><%= Time.now.strftime('%d %b %Y') %></span>
-					</span>
-				</div>
-			</div>
-			<div class='u-full-width'>
-				<p id='paragraph--short-link' class='listing--link'>
-					<a href="/<%= @dyno_link %>" target='_blank'>https://dynopop.com/<%= @dyno_link %></a>
-				</p>
-			</div>
-			<div class='u-full-width'>
-				<span class='listing--amount'>
-					Ready to copy
+				<span><b>#dynopop</b></span>
+				<span class='u-pull-right'>
+					<span class='listing--timestamp'><%= Time.now.strftime('%d %b %Y') %></span>
 				</span>
-				<button id='button--copy-link' class='button__outline u-pull-right' onclick='copy_link()'>Copy</button>
+			</div>
+			<div class='u-full-width' style='margin-bottom: 1em;'>
+				<span id='paragraph--short-link' class='listing--link'>
+					<a href="/<%= @dyno_link %>" target='_blank'><u>https://dynopop.com/<%= @dyno_link %></u></a>
+					<button id='button--copy-link' class='button__outline u-pull-right' onclick='copy_link()'>Copy</button>
+				</span>
+				<span class='listing--original-link' title="<%= @dyno_origin %>">
+					<%= @dyno_origin[0,48] %><% if @dyno_origin.length > 48 %>...<% end %>
+				</span>
+				<!-- <div class='u-full-width listing--share-links'>Share to:
+					<span><img src='/icons/twitter.svg' class='icon-nano'/></span>
+					<span><img src='/icons/facebook.svg' class='icon-nano'/></span>
+					<span><img src='/icons/linkedin.svg' class='icon-nano'/></span>
+				</div> -->
 			</div>
 		</li>
 	<% end %>
+	<span class='listing--original-link' style='text-align: center;'>Provide feedback using the <b>#dynopop</b> hashtag on Twitter</span>
+	<!-- <li class="listing">
+		<div class="listing--metadata u-full-width">
+			<span><b>#dynopop</b></span>
+			<span class="u-pull-right">
+				<span class="listing--timestamp">03 Dec 2021</span>
+			</span>
+		</div>
+		<div class="u-full-width" style="margin-bottom: 1em;">
+			<span id="paragraph--short-link" class="listing--link">
+				<a href="/nOpxAcSL" target="_blank">https://dynopop.com/nOpxAcSL</a>
+				<button id="button--copy-link" class="button__outline u-pull-right" onclick="copy_link()">Copy</button>
+			</span>
+			<span class="listing--original-link" title="https://stackoverflow.com/questions/10546845/passing-variable-from-sinatra-module-to-view">
+				https://stackoverflow.com/questions/10546845/pas...
+			</span>
+		</div>
+
+		<div class="listing--metadata u-full-width">
+			<span><b>#dynopop</b></span>
+			<span class="u-pull-right">
+				<span class="listing--timestamp">03 Dec 2021</span>
+			</span>
+		</div>
+		<div class="u-full-width" style="margin-bottom: 1em;">
+			<span id="paragraph--short-link" class="listing--link">
+				<a href="/nOpxAcSL" target="_blank">https://dynopop.com/nOpxAcSL</a>
+				<button id="button--copy-link" class="button__outline u-pull-right" onclick="copy_link()">Copy</button>
+			</span>
+			<span class="listing--original-link" title="https://stackoverflow.com/questions/10546845/passing-variable-from-sinatra-module-to-view">
+				https://stackoverflow.com/questions/10546845/pas...
+			</span>
+		</div>
+
+		<div class="listing--metadata u-full-width">
+			<span><b>#dynopop</b></span>
+			<span class="u-pull-right">
+				<span class="listing--timestamp">03 Dec 2021</span>
+			</span>
+		</div>
+		<div class="u-full-width" style="margin-bottom: 1em;">
+			<span id="paragraph--short-link" class="listing--link">
+				<a href="/nOpxAcSL" target="_blank">https://dynopop.com/nOpxAcSL</a>
+				<button id="button--copy-link" class="button__outline u-pull-right" onclick="copy_link()">Copy</button>
+			</span>
+			<span class="listing--original-link" title="https://stackoverflow.com/questions/10546845/passing-variable-from-sinatra-module-to-view">
+				https://stackoverflow.com/questions/10546845/pas...
+			</span>
+		</div>
+
+	</li> -->
 </ul>
