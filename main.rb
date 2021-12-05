@@ -2,6 +2,7 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'sinatra/flash'
 require 'json'
+require 'yaml'
 
 include ERB::Util
 
@@ -15,6 +16,7 @@ configure do
 	end
 
 	enable :show_exceptions, :sessions, :logging
+	set :app_file, 'main.rb'
 end
 
 helpers do
@@ -39,7 +41,7 @@ get '/' do
 	@path = :'DynoPop'
 	unless params.nil?
 		@dyno_link		= params[:byte]
-		@dyno_address	= params[:link]
+		@dyno_origin	= params[:link]
 		params.clear
 	end
 	erb :home
@@ -48,62 +50,72 @@ end
 get '/:url' do
 	@dyno_link = params[:url]
 
+	data = File.open('bytes.yml', "r") { |file|
+		YAML.load(file)
+	}
 	
 
-	file = File.new('bytes.json', 'r+')
-	json = File.read(file)
-	data = JSON.parse(json)
+	url_exists = Array.new
+	
+	data[:data].each {|byte|
+		if byte[:byte] == @dyno_link
+			byte[:clicks] += 1
+			url_exists.push(byte)
+		end
+	}
+	
+	File.open('bytes.yml', "w") { |file|
+		YAML.dump(data, file)
+	}
 
-	unless data['data'].keys.include?(@dyno_link)
+	if url_exists.first.nil?
+		status 404
 		redirect to not_found
 	end
 	
-	@dyno_address = data['data'][@dyno_link]
-	file.close
+	@dyno_origin = url_exists.first[:url]
 	
 	status 302
-	redirect to @dyno_address
-end
-
-get '/url' do
-	params.inspect
+	redirect to @dyno_origin
 end
 
 post '/links' do
 	url = params[:link].chomp('/').downcase
 	data = Hash.new
 
-	file = File.new('bytes.json', 'r+')
-	json = File.read(file)
-	data = JSON.parse(json)
+	data = File.open('bytes.yml', "r+") { |file|
+		YAML.load(file)
+	}
 
-	if data['data'].values.include?(url)
-		@dyno_link = data['data'].key(url)
-		flash[:notice] = 'Short link already exists. Find the link below'
-	else
-		# if !File::exists?('bytes.json')
-		# 	file = File.new('bytes.json', 'w+')
-		# 	@dyno_link = generate_url
-		# 	data[@dyno_link] = url
-		# 	data = {
-		# 		data: data
-		# 	}
-		# 	File.write('bytes.json', JSON.pretty_generate(data))
-		# 	file.close
-			
-		# 	flash[:success] = 'New URL created'
-		# else
-		@dyno_link = generate_url
-		
-		data['data'][@dyno_link] = url
-		
-		File.write('bytes.json', JSON.pretty_generate(data))
-		file.close
-		flash[:success] = 'New link created'
-		# end
+	url_exists = Array.new
+	
+	data[:data].each {|byte|
+		url_exists.push(byte) if byte[:url] == url
+	}
+
+	# Get the short link saved in the url_exists array
+	url_exists = url_exists.first
+
+	unless url.match(/^https:\/\/|www.|http:\/\//)
+		flash[:warning] = 'Could not shorten link. That is not a valid web address.'
+		redirect to '/'
 	end
 
-	@dyno_address = url
+	unless url_exists.nil?
+		@dyno_link = url_exists[:byte]
+		flash[:notice] = 'Short link already exists. Find the link below.'
+	else
+		@dyno_link = generate_url
+		new_byte = { url: url, byte: @dyno_link, clicks: 0, created_at: Time.now.to_i }
+		
+		data[:data].push(new_byte)
+		
+		File.open('bytes.yml', "r+") { |file|
+			YAML.dump(data, file)
+		}
+		flash[:success] = 'New link created.'
+	end
+
 	redirect to("/?byte=#{@dyno_link}&link=#{url_encode(url)}")
 end
 

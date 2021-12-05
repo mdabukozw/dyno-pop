@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>DynoPop</title>
+		<title>DynoPop | Byte-size link shortener</title>
+		<meta name='description' content='DynoPop is a FREE open-source URL shortener. Create your byte-size links now.'/>
 		<meta charset="utf-8">
 		<%= css :base, :skeleton, :styles %>
+		<link href='/images/dynopop.svg' rel='shortcut icon' type='image/x-icon'>
+
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="@mdabukozw" />
+		<meta name="twitter:title" content="DynoPop | Link shortener." />
+		<meta name="twitter:description" content="DynoPop is a FREE open-source URL shortener. Create your byte-size links now." />
+		<meta name="twitter:image" content="https://dynopop.com/images/dynopop_cover.jpg" />
+		<meta name="twitter:image:alt" content="Dynopop logo" />
 	</head>
 	<body>
 		<%= erb :nav %>
@@ -17,6 +26,11 @@
 			<%= styled_flash %>
 			<%= yield %>
 		</section>
+		<footer class='u-full-width gutted-30'>
+			<span>Made by <a href='https://twitter.com/mdabukozw'>@wearecradle</a></span>
+			<!-- <span>Support the initiative <u>here</u> if you are in Zimbabwe or <u>here</u> if you're international)</span> -->
+			<span class='u-pull-right'>&copy; DynoPop <%= Time.now.strftime('%Y') %></span>
+		</footer>
 	</body>
 	<script>
 		function copy_link() {

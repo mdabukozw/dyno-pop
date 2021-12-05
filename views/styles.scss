@@ -14,8 +14,8 @@ body {
 	font-family: $main-font;
 	margin: 0;
 	background-color: #f4fff8;
-	background-image: url("/images/light-background.svg");
-	background-size: 32em;
+	background-image: url("/images/bg.svg");
+	background-size: 24em;
 	background-position: center;
 }
 
@@ -133,14 +133,27 @@ header {
 	}
 }
 
+footer {
+	position: fixed;
+	color: $black;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+	background-color: #c6cec5;
+
+	a {
+		color: inherit;
+	}
+}
+
 button, .button {
 	display: block;
 	height: auto;
 	box-sizing: border-box;
-	padding: 0em 3em;
+	padding: 0.35em 3em;
 	line-height: 29px;
 	border-radius: 5em;
-	background-color: $green;
+	background-color: lighten($green, 5%);
 	border: none;
 	color: $white;
 	cursor: pointer;
@@ -150,8 +163,8 @@ button, .button {
 		fill: $white;
 	}
 
-	&:hover {
-		background: lighten($green, 5%);
+	&:hover, &:focus {
+		background: lighten($green, 15%);
 		color: $white;
 		box-shadow: 0px 0px 10px 2px $grey;
 	}
@@ -161,7 +174,7 @@ button, .button {
 	display: block;
 	height: auto;
 	box-sizing: border-box;
-	padding: 0em 3em;
+	padding: 0.35em 3em;
 	line-height: 29px;
 	border-radius: 5em;
 	background-color: $white;
@@ -224,6 +237,11 @@ button, .button {
 	font-weight: 600;
 	text-transform: capitalize;
 }
+.listing--metadata {
+	margin-bottom: 1.5em;
+	padding-bottom: .5em;
+	border-bottom: 1px solid $outline;
+}
 .listing--username {
 	@include microtext;
 
@@ -242,9 +260,13 @@ button, .button {
 		text-decoration: none;
 	}
 }
-.listing--timestamp {
+.listing--timestamp, .listing--original-link, .listing--share-links {
 	@include microtext;
 	margin-right: .5em;
+}
+.listing--original-link { display: block; }
+.listing--share-links {
+	margin: 1.5em 0;
 }
 .listing--user-avatar {
 	border-radius: 100%;
