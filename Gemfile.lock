@@ -4,7 +4,7 @@ GEM
     cgi (0.3.1)
     erb (2.2.3)
       cgi
-    ffi (1.15.4-x86-mingw32)
+    ffi (1.15.4-x86_64-linux)
     json (2.6.1)
     multi_json (1.15.0)
     mustermann (1.1.1)
@@ -39,7 +39,7 @@ GEM
     yaml (0.2.0)
 
 PLATFORMS
-  x86-mingw32
+  x86_64-linux
 
 DEPENDENCIES
   erb (>= 2.2.3)
