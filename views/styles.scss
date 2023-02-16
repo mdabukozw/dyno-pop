@@ -164,7 +164,7 @@ button, .button {
 	}
 
 	&:hover, &:focus {
-		background: lighten($green, 15%);
+		background: darken($green, 15%);
 		color: $white;
 		box-shadow: 0px 0px 10px 2px $grey;
 	}
